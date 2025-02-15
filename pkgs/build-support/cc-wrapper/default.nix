@@ -822,18 +822,18 @@ stdenvNoCC.mkDerivation {
     # breaks `-isysroot` with an unwrapped compiler. As macOS has
     # no `/usr/include`, there’s essentially no risk to dropping
     # the flag there. See discussion in NixOS/nixpkgs#191152.
-    #
-    +
-      optionalString
-        (
-          (cc.isClang or false)
-          && !(cc.isROCm or false)
-          && !targetPlatform.isDarwin
-          && !targetPlatform.isAndroid
-        )
-        ''
-          echo "-nostdlibinc" >> $out/nix-support/cc-cflags
-        ''
+    # Remove this for kernel compile
+    # +
+      # optionalString
+      #   (
+      #     (cc.isClang or false)
+      #     && !(cc.isROCm or false)
+      #     && !targetPlatform.isDarwin
+      #     && !targetPlatform.isAndroid
+      #   )
+      #   ''
+      #     echo "-nostdlibinc" >> $out/nix-support/cc-cflags
+      #   ''
 
     ##
     ## Man page and info support
