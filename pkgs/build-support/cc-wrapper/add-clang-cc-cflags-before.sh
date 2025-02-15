@@ -1,11 +1,16 @@
 needsTarget=true
+targetValue=""
 
 for p in "${params[@]}"; do
     case "$p" in
-    -target | --target=*)
+    -target)
         needsTarget=false
-
-        echo "Warning: supplying the --target argument to a nix-wrapped compiler may not work correctly - cc-wrapper is currently not designed with multi-target compilers in mind. You may want to use an un-wrapped compiler instead." >&2
+        targetValue=$2
+        shift 2
+        ;;
+    --target=*)
+        needsTarget=false
+        targetValue="${p#*=}"
         ;;
     esac
 done
